@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Buttton({
+function Button({
     children,
     type='button',
     bgColor = 'bg-blue-600',
@@ -17,4 +17,4 @@ function Buttton({
   )
 }
 
-export default Buttton
+export default Button
