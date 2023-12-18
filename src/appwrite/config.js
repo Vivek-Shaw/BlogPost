@@ -31,7 +31,7 @@ export class Service {
     }
   }
 
-  async updatePost(slug, { title, content, featuredImage, status }) {
+  async updatePost(slug, { title, content, featuredImage, Status }) {
     try {
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
@@ -40,8 +40,8 @@ export class Service {
         {
           title,
           content,
-          featuredimage,
-          status,
+          featuredImage,
+          Status,
         }
       );
     } catch (error) {
@@ -76,7 +76,7 @@ export class Service {
     }
   }
 
-  async getPosts(queries = [Query.equal("status", "active")]) {
+  async getPosts(queries = [Query.equal("Status", "active")]) {
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
@@ -95,7 +95,7 @@ export class Service {
     try {
       return await this.bucket.createFile(
         conf.appwriteBucketId,
-        Id.unique(),
+        ID.unique(),
         file
       );
     } catch (error) {
