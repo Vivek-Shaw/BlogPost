@@ -22,7 +22,7 @@ export default function PostForm({ post }) {
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-
+  
   const submit = async (data) => {
     
     if (post) {
@@ -44,6 +44,7 @@ export default function PostForm({ post }) {
     
     else {
       const file = await appwriteService.uploadFile(data.image[0]);
+      
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
