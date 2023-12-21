@@ -14,11 +14,20 @@ function Home() {
               setPosts(posts.documents);
             }
           });
-          setIsLoggedIn(authService.getCurrentUser())
+          // setIsLoggedIn(authService.isLoggedIn())
         }, []);
         
-        console.log(typeof(isLoggedIn));
-        //console.log(isLoggedIn.values);
+        (async()=>{
+          try{
+            setIsLoggedIn(await authService.getCurrentUser())
+          }
+          catch(error){
+            console.log("No user Found", error);
+          }
+        })();
+        // console.log(typeof(isLoggedIn));
+        console.log(isLoggedIn);
+       
         if (isLoggedIn === null) {
           return (
             <div className="w-full py-8 mt-4 text-center">
