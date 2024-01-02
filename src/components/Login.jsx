@@ -5,7 +5,7 @@ import {Button, Input, Logo} from './index'
 import { useDispatch } from 'react-redux'
 import authService from '../appwrite/auth'
 import { useForm } from 'react-hook-form'
-
+import logo from "../assets/logo.jpeg";
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -32,8 +32,8 @@ function Login() {
         rounded-xl p-10 border border-black/10`}
       >
         <div className="mb-2 flex justify-center">
-          <span className="inline-block w-full max-w-[100px]">
-            <Logo width="100%" />
+          <span className="inline-block w-full max-w-[150px]">
+            <Logo logo={logo} classVar=" rounded-3xl" />
           </span>
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">
@@ -64,18 +64,17 @@ function Login() {
                 },
               })}
             />
-            <Input 
-            label="Password:"
-            type="password"
-            placeholder="Enter the Password"
-            {...register("password", {
+            <Input
+              label="Password:"
+              type="password"
+              placeholder="Enter the Password"
+              {...register("password", {
                 required: true,
-            })}
+              })}
             />
-            <Button
-            type="submit"
-            className="w-full"
-            >Sign in</Button>
+            <Button type="submit" className="w-full">
+              Sign in
+            </Button>
           </div>
         </form>
       </div>
