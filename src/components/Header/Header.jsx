@@ -2,7 +2,7 @@ import React from 'react'
 import {Container, Logo, LogoutBtn} from '../index';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import logo from '../../assets/logo.jpeg';
 
 const Header = () => {
     const authStatus = useSelector((state)=>state.auth.status)
@@ -35,14 +35,19 @@ const Header = () => {
         slug: "/add-post",
         active: authStatus,
       },
+      {
+        name: "My Posts",
+        slug: "/my-posts",
+        active: authStatus,
+      },
     ];
   return (
-    <header className="py-3 shadow bg-gray-500">
+    <header className="py-3 shadow bg-slate-100">
       <Container>
         <nav className="flex">
-          <div className="mr-4">
+          <div className="mr-4 size-8">
             <Link to="/">
-              <Logo width="70px" />
+              <Logo logo={logo} classVar="h-10 rounded-3xl" />
             </Link>
           </div>
           <ul className="flex ml-auto">
@@ -59,9 +64,9 @@ const Header = () => {
               ) : null
             )}
             {authStatus && (
-                <li>
-                    <LogoutBtn />
-                </li>
+              <li>
+                <LogoutBtn />
+              </li>
             )}
           </ul>
         </nav>
