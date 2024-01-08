@@ -76,7 +76,7 @@ export class Service {
     }
   }
 
-  async getPosts(queries = [Query.equal("Status", "active")]) {
+  async getPosts(queries = [Query.equal("status", "active")]) {
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
@@ -90,9 +90,12 @@ export class Service {
   }
 
   //file upload service
-
   async uploadFile(file) {
+    // const machineId = require("node-machine-id");
     try {
+      // const uniqueId = Date.now().toString();
+      // console.log(uniqueId);
+
       return await this.bucket.createFile(
         conf.appwriteBucketId,
         ID.unique(),
@@ -103,6 +106,20 @@ export class Service {
       return false;
     }
   }
+
+  // async uploadFile(file) {
+  //   const uniqueId = await machineId.machineId();
+  //   try {
+  //     return await this.bucket.createFile(
+  //       conf.appwriteBucketId,
+  //       uniqueId,
+  //       file
+  //     );
+  //   } catch (error) {
+  //     console.log("Appwrite service :: uploadFile :: error", error);
+  //     return false;
+  //   }
+  // }
 
   async deleteFile(fileId) {
     try {

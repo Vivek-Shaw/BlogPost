@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function PostForm({ post }) {
-
   // console.log(post);
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -19,12 +18,13 @@ export default function PostForm({ post }) {
         status: post?.status || "active",
       },
     });
-
+  console.log("post :", post);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  
+
   const submit = async (data) => {
-    
+    console.log("post :", post);
+    console.log("data", data);
     if (post) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -40,12 +40,11 @@ export default function PostForm({ post }) {
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
       }
-    } 
-    
-    else {
+    } else {
       const file = await appwriteService.uploadFile(data.image[0]);
-      
+
       if (file) {
+        console.log(userData);
         const fileId = file.$id;
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
@@ -136,7 +135,6 @@ export default function PostForm({ post }) {
           type="submit"
           bgColor={post ? "bg-green-500" : undefined}
           className="w-full duration-200 hover:bg-blue-100"
-          onClick={submit}
         >
           {post ? "Update" : "Submit"}
         </Button>
