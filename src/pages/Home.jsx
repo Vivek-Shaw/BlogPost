@@ -43,7 +43,7 @@ function Home() {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <Container>
-          <div className="m-10 p-9 flex flex-wrap  ">
+          <div className="m-10 p-20 flex flex-wrap  ">
             <div className="p-4 w-full">
               <h1 className="text-2xl font-bold hover:text-gray-500">
                 Login or Signup to read posts&nbsp;
