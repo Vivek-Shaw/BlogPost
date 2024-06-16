@@ -15,7 +15,7 @@ import AllPost from "./pages/AllPost.jsx";
 import EditPost from "./pages/EditPost.jsx";
 import Post from "./pages/Post.jsx";
 import MyPost from "./pages/MyPost.jsx";
-import HomeTemp from "./pages/HomeTemp.jsx";
+// import HomeTemp from "../public/HomeTemp.jsx";
 
 const router = createBrowserRouter([
   {
