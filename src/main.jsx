@@ -26,10 +26,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/home-temp",
-        element: <HomeTemp />,
-      },
+      // {
+      //   path: "/home-temp",
+      //   element: <HomeTemp />,
+      // },
       {
         path: "login",
         element: (
