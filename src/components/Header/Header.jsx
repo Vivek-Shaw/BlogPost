@@ -1,60 +1,64 @@
-import React, {  useState } from 'react'
-import { Logo, LogoutBtn} from '../index';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import logo from '../../assets/logo.jpeg';
+import React, { useState } from "react";
+import { Logo, LogoutBtn } from "../index";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import logo from "../../assets/logo.jpeg";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
-    const authStatus = useSelector((state)=>state.auth.status)
-    // console.log(authStatus);
-    const navigate = useNavigate()
-    const [isOpen, setIsOpen] = useState(false);
-    // const linksContainerRef = useRef(null);
-    // const linksRef = useRef(null);
+  const authStatus = useSelector((state) => state.auth.status);
+  // console.log(authStatus);
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  // const linksContainerRef = useRef(null);
+  // const linksRef = useRef(null);
 
-    const toggleButton = () => {
-     
-      setIsOpen(!isOpen);
-      console.log(isOpen);
-    };
-    // const linkStyle = {
-    //   height: isOpen
-    //     ? `${linksRef.current.getBoundingClientRect().height}px`
-    //     : "10px",
-    // };
-    const navItems = [
-      {
-        name: "Home",
-        slug: "/",
-        active: true,
-      },
-      {
-        name: "Login",
-        slug: "/login",
-        active: !authStatus,
-      },
-      {
-        name: "Signup",
-        slug: "/signup",
-        active: !authStatus,
-      },
-      {
-        name: "All Posts",
-        slug: "/all-posts",
-        active: authStatus,
-      },
-      {
-        name: "Add Post",
-        slug: "/add-post",
-        active: authStatus,
-      },
-      {
-        name: "My Posts",
-        slug: "/my-posts",
-        active: authStatus,
-      },
-    ];
+  const toggleButton = () => {
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  };
+  // const linkStyle = {
+  //   height: isOpen
+  //     ? `${linksRef.current.getBoundingClientRect().height}px`
+  //     : "10px",
+  // };
+  const navItems = [
+    {
+      name: "Home",
+      slug: "/",
+      active: true,
+    },
+    {
+      name: "Login",
+      slug: "/login",
+      active: !authStatus,
+    },
+    {
+      name: "Signup",
+      slug: "/signup",
+      active: !authStatus,
+    },
+    {
+      name: "All Posts",
+      slug: "/all-posts",
+      active: authStatus,
+    },
+    {
+      name: "Add Post",
+      slug: "/add-post",
+      active: authStatus,
+    },
+    {
+      name: "My Posts",
+      slug: "/my-posts",
+      active: authStatus,
+    },
+    // {
+    //   name: "HomeTemp",
+    //   slug: "/home-temp",
+    //   active: true,
+    // },
+  ];
   return (
     <header className="py-3 shadow bg-slate-100">
       <nav className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,8 +111,8 @@ const Header = () => {
       </nav>
       {/* mobile-menu */}
       {isOpen ? (
-        <div className='md:hidden'>
-          <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <ul className="flex flex-col ml-auto md:gap-2">
               {navItems.map((item) =>
                 item.active ? (
@@ -133,6 +137,6 @@ const Header = () => {
       ) : null}
     </header>
   );
-}
+};
 
-export default Header
+export default Header;
