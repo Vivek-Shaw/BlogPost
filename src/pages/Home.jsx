@@ -1,31 +1,40 @@
 import React from "react";
 import appwriteService from "../appwrite/config.js";
-import authService from "../appwrite/auth.js";
+//import authService from "../appwrite/auth.js";
 import { Container, Postcard } from "../components";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Home() {
   const [posts, setPosts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  useEffect(() => {
-    (async () => {
-      try {
-        setIsLoggedIn(await authService.getCurrentUser());
-      } catch (error) {
-        console.log("No user Found", error);
-      }
-    })();
-    appwriteService.getPosts().then((posts) => {
-      if (posts) {
-        setPosts(posts.documents);
-        console.log(posts.documents);
-      }
-    });
+  //const navigation = useNavigation();
+  //const isPageLoading = navigation.state === "loading";
+  const userAvailable = useSelector((state) => state.auth.status);
+  
+  useEffect(
+    () => {
+      // (async () => {
+      //   try {
+      //     setIsLoggedIn(await authService.getCurrentUser());
+      //   } catch (error) {
+      //     console.log("No user Found", error);
+      //   }
+      // })();
+      appwriteService.getPosts().then((posts) => {
+        if (posts) {
+          setPosts(posts.documents);
+          console.log(posts.documents);
+        }
+      });
 
-    // setIsLoggedIn(authService.isLoggedIn())
-  }, [setPosts, setIsLoggedIn]);
+      // setIsLoggedIn(authService.isLoggedIn())
+    },
+    // [setPosts, setIsLoggedIn]
+    [setPosts]
+  );
 
   // (async()=>{
   //   try{
@@ -37,9 +46,9 @@ function Home() {
   // })();
   // // console.log(typeof(isLoggedIn));
 
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
-  if (isLoggedIn === null) {
+  if (userAvailable === false) {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <Container>
@@ -68,17 +77,19 @@ function Home() {
     );
   }
   return (
-    <div className="w-full py-8">
-      <Container>
-        <div className="flex flex-wrap">
-          {posts.map((post) => (
-            <div key={post.$id} className="p-2 w-1/4">
-              <Postcard {...post} />
-            </div>
-          ))}
-        </div>
-      </Container>
-    </div>
+    <>
+      <div className="w-full py-8">
+        <Container>
+          <div className="flex flex-wrap">
+            {posts.map((post) => (
+              <div key={post.$id} className="p-2 w-1/4">
+                <Postcard {...post} />
+              </div>
+            ))}
+          </div>
+        </Container>
+      </div>
+    </>
   );
 }
 

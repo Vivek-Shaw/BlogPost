@@ -5,12 +5,15 @@ import authService from "./appwrite/auth";
 import { useEffect } from "react";
 import { login, logout } from "./store/authSlice";
 import { Footer, Header } from "./components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
+import Loading from "./components/Loading";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
+  const isPageLoading = navigation.state === "loading";
+  console.log("page", isPageLoading);
   useEffect(() => {
     authService
       .getCurrentUser()
@@ -31,9 +34,13 @@ function App() {
     >
       <div className="w-full block">
         <Header />
-        <main>
-          <Outlet />
-        </main>
+        {isPageLoading ? (
+          <Loading />
+        ) : (
+          <section className="align-element py-20">
+            <Outlet />
+          </section>
+        )}
         <Footer />
       </div>
     </div>
